@@ -1,0 +1,112 @@
+﻿<Page x:Class="FileNavigationApp.Presentation.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="using:FileNavigator.Presentation"
+      xmlns:sys="using:System"
+      xmlns:uen="using:Uno.Extensions.Navigation.UI"
+      xmlns:utu="using:Uno.Toolkit.UI"
+      xmlns:um="using:Uno.Material"
+      NavigationCacheMode="Required"
+      Background="{ThemeResource BackgroundBrush}">
+  <ScrollViewer IsTabStop="True">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Top Header Navigation Deck -->
+        <Grid Grid.Row="0" Margin="0,0,0,15">
+            <TextBlock Text="File Navigator App" FontSize="20" FontWeight="Bold" VerticalAlignment="Center"/>
+            <Button Content="⚙ Settings" HorizontalAlignment="Right" Command="{Binding ToggleSettingsCommand}" Style="{StaticResource AccentButtonStyle}"/>
+        </Grid>
+        <Grid Grid.Row="1" Visibility="{Binding IsShowingSearchView, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Visible}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Search Controls -->
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="10" Margin="0,0,0,10">
+                <TextBox Text="{Binding SearchPath, Mode=TwoWay}" PlaceholderText="Root Path (/ or C:\)" Width="250"/>
+                <TextBox Text="{Binding SearchQuery, Mode=TwoWay}" PlaceholderText="Search Pattern (e.g. *.txt)" Width="200"/>
+                <Button Content="Search" Command="{Binding SearchCommand}" Style="{StaticResource AccentButtonStyle}"/>
+            </StackPanel>
+
+            <!-- Metrics & Logging -->
+            <TextBlock Grid.Row="1" Text="{Binding StatusText}" FontStyle="Italic" Foreground="Gray" Margin="0,0,0,10"/>
+
+            <!-- Results Table -->
+            <ListView Grid.Row="2" ItemsSource="{Binding DisplayedResults}">
+                <ListView.HeaderTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Name / Path" FontWeight="Bold" Grid.Column="0"/>
+                            <TextBlock Text="Created Date" FontWeight="Bold" Grid.Column="1"/>
+                            <TextBlock Text="Modified Date" FontWeight="Bold" Grid.Column="2"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.HeaderTemplate>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="{Binding Name}" FontWeight="SemiBold"/>
+                                <TextBlock Text="{Binding FullPath}" FontSize="11" Foreground="DimGray"/>
+                            </StackPanel>
+                            <TextBlock Text="{Binding CreatedDisplay}" Grid.Column="1" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding ModifiedDisplay}" Grid.Column="2" VerticalAlignment="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <!-- Pagination Bar -->
+            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="20" Margin="0,10,0,0">
+                <Button Content="◀ Previous" Command="{Binding PrevPageCommand}"/>
+                <!--<TextBlock Text="{Binding CurrentPage, StringFormat='Page {0}'}" VerticalAlignment="Center" FontWeight="Bold"/>-->
+                <!--<TextBlock Text="{x:Bind sys:String.Format('Page {0}', CurrentPage), Mode=OneWay}" />-->
+                <TextBlock Text="{Binding CurrentPage, Mode=OneWay}" VerticalAlignment="Center" FontWeight="Bold"/>
+                <Button Content="Next ▶" Command="{Binding NextPageCommand}"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Application Settings Page -->
+        <ScrollViewer Grid.Row="1" Visibility="{Binding IsShowingSettings, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Collapsed}">
+            <StackPanel Spacing="20" MaxWidth="500" HorizontalAlignment="Left" Padding="10">
+                <TextBlock Text="Application Settings" FontSize="18" FontWeight="SemiBold"/>
+
+                <ToggleSwitch Header="Dark Theme Mode"
+                              IsOn="{Binding Settings.IsDarkMode, Mode=TwoWay}"
+                              OffContent="Light Mode" OnContent="Dark Mode" FontSize="12" FontWeight="SemiBold"/>
+                <TextBlock Text="Dark Theme Mode" FontSize="18" FontWeight="SemiBold"/>
+
+                <ToggleSwitch Header="Case-Insensitive Searching"
+                              IsOn="{Binding Settings.IsCaseInsensitive, Mode=TwoWay}"
+                              OffContent="Match Exact Case" OnContent="Ignore Casing" FontSize="12" FontWeight="SemiBold"/>
+                <TextBlock Text="Case Sensitivity" FontSize="18" FontWeight="SemiBold"/>
+
+                <ToggleSwitch Header="Show Hidden System Files &amp; Folders"
+                              IsOn="{Binding Settings.IncludeHiddenFiles, Mode=TwoWay}"
+                              OffContent="Hide (Dotfiles)" OnContent="Show All Files" FontSize="12" FontWeight="SemiBold"/>
+                <TextBlock Text="Hidden Files" FontSize="18" FontWeight="SemiBold"/>
+
+                <Button Content="Back to Search" Command="{Binding ToggleSettingsCommand}" Margin="0,20,0,0"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+  </ScrollViewer>
+</Page>
+
