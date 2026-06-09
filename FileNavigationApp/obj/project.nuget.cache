@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "piUEWo+ZvD0=",
+  "dgSpecHash": "7byoG7wH2OY=",
   "success": true,
   "projectFilePath": "/home/choox123/RiderProjects/FileNavigationApp/FileNavigationApp/FileNavigationApp.csproj",
   "expectedPackageFiles": [
@@ -116,7 +116,9 @@
     "/home/choox123/.nuget/packages/uno.winui.runtime.skia.macos/6.5.237/uno.winui.runtime.skia.macos.6.5.237.nupkg.sha512",
     "/home/choox123/.nuget/packages/uno.winui.runtime.skia.win32/6.5.237/uno.winui.runtime.skia.win32.6.5.237.nupkg.sha512",
     "/home/choox123/.nuget/packages/uno.winui.runtime.skia.wpf/6.5.237/uno.winui.runtime.skia.wpf.6.5.237.nupkg.sha512",
-    "/home/choox123/.nuget/packages/uno.winui.runtime.skia.x11/6.5.237/uno.winui.runtime.skia.x11.6.5.237.nupkg.sha512"
+    "/home/choox123/.nuget/packages/uno.winui.runtime.skia.x11/6.5.237/uno.winui.runtime.skia.x11.6.5.237.nupkg.sha512",
+    "/home/choox123/.nuget/packages/microsoft.netcore.app.runtime.linux-x64/10.0.7/microsoft.netcore.app.runtime.linux-x64.10.0.7.nupkg.sha512",
+    "/home/choox123/.nuget/packages/microsoft.aspnetcore.app.runtime.linux-x64/10.0.7/microsoft.aspnetcore.app.runtime.linux-x64.10.0.7.nupkg.sha512"
   ],
   "logs": []
 }

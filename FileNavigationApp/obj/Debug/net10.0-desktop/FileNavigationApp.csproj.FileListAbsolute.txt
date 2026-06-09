@@ -371,3 +371,4 @@
 /home/choox123/RiderProjects/FileNavigationApp/FileNavigationApp/obj/Debug/net10.0-desktop/FileNavigationApp.pdb
 /home/choox123/RiderProjects/FileNavigationApp/FileNavigationApp/obj/Debug/net10.0-desktop/FileNavigationApp.genruntimeconfig.cache
 /home/choox123/RiderProjects/FileNavigationApp/FileNavigationApp/obj/Debug/net10.0-desktop/ref/FileNavigationApp.dll
+/home/choox123/RiderProjects/FileNavigationApp/FileNavigationApp/obj/Debug/net10.0-desktop/FileNavigationApp.sourcelink.json
